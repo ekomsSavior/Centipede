@@ -1,4 +1,4 @@
-# centipede
+# Centipede
 
 Self-replicating Linux worm with multi-layer C2 communication, privilege escalation via kernel exploits, dark web command interface, Discord fallback, and a full payload suite for post-exploitation operations.
 
