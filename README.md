@@ -4,6 +4,9 @@ Self-replicating Linux worm with multi-layer C2 communication, privilege escalat
 
 **DISCLAIMER:** For authorized security testing and educational purposes only>
 
+<img width="1536" height="1024" alt="worm" src="https://github.com/user-attachments/assets/e1f94676-8d44-4270-a6c8-c37f5819f5ee" />
+
+
 ```
 centipede/
 ├── cmd/
