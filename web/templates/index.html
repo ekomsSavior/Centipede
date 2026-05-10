@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>centipede C2</title>
+    <link rel="stylesheet" href="/static/css/dark.css">
+</head>
+<body>
+    <div id="app">
+        <nav id="sidebar">
+            <div class="logo">
+                <span class="icon">🐛</span>
+                <h1>centipede</h1>
+                <span class="version">v0.1.0</span>
+            </div>
+            <div class="nav-stats">
+                <div class="stat-card">
+                    <span class="stat-value" id="total-bots">0</span>
+                    <span class="stat-label">Total Bots</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="connected-bots">0</span>
+                    <span class="stat-label">Online</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="root-bots">0</span>
+                    <span class="stat-label">Root</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-view="dashboard"><a href="#">Dashboard</a></li>
+                <li data-view="bots"><a href="#">Bots</a></li>
+                <li data-view="commands"><a href="#">Commands</a></li>
+                <li data-view="payloads"><a href="#">Payloads</a></li>
+                <li data-view="exploits"><a href="#">Exploits</a></li>
+            </ul>
+        </nav>
+
+        <main id="content">
+            <!-- Dashboard View -->
+            <div id="view-dashboard" class="view active">
+                <div class="view-header">
+                    <h2>Dashboard</h2>
+                    <div class="header-controls">
+                        <button id="btn-refresh" class="btn">Refresh</button>
+                        <button id="btn-command-all" class="btn btn-accent">Command All</button>
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="panel" id="bot-activity">
+                        <div class="panel-header">Bot Activity</div>
+                        <div class="panel-body">
+                            <div id="activity-log"></div>
+                        </div>
+                    </div>
+                    <div class="panel" id="quick-command">
+                        <div class="panel-header">Quick Command</div>
+                        <div class="panel-body">
+                            <select id="cmd-action" class="input">
+                                <option value="enum">Enumerate System</option>
+                                <option value="harvest">Harvest Credentials</option>
+                                <option value="persist">Install Persistence</option>
+                                <option value="pivot">Setup Pivot</option>
+                                <option value="exec">Execute Command</option>
+                                <option value="payload">Run Payload</option>
+                                <option value="enum">System Enumeration</option>
+                                <option value="exfil">Exfiltrate Data</option>
+                                <option value="wipe">Forensic Wipe</option>
+                                <option value="selfdestruct">Self Destruct</option>
+                            </select>
+                            <input type="text" id="cmd-args" class="input" placeholder="Arguments (JSON)">
+                            <button id="btn-send-cmd" class="btn btn-accent">Send to All Bots</button>
+                        </div>
+                    </div>
+                    <div class="panel" id="layer-status">
+                        <div class="panel-header">C2 Layer Status</div>
+                        <div class="panel-body">
+                            <div class="layer-info">
+                                <span class="layer-dot green"></span> WebSocket
+                                <span class="layer-dot gray"></span> DNS Tunnel
+                                <span class="layer-dot gray"></span> Discord
+                                <span class="layer-dot gray"></span> ICMP
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bots View -->
+            <div id="view-bots" class="view">
+                <div class="view-header">
+                    <h2>Bots</h2>
+                    <div class="header-controls">
+                        <input type="text" id="bot-search" class="input" placeholder="Search bots...">
+                        <button id="btn-broadcast" class="btn btn-accent">Broadcast Command</button>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-body">
+                        <table id="bot-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hostname</th>
+                                    <th>IP</th>
+                                    <th>OS/Arch</th>
+                                    <th>Kernel</th>
+                                    <th>Status</th>
+                                    <th>Privilege</th>
+                                    <th>Layer</th>
+                                    <th>Tag</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bot-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commands View -->
+            <div id="view-commands" class="view">
+                <div class="view-header">
+                    <h2>Command History</h2>
+                </div>
+                <div class="panel">
+                    <div class="panel-body">
+                        <table id="cmd-table">
+                            <thead>
+                                <tr><th>ID</th><th>Target</th><th>Action</th><th>Status</th><th>Result</th><th>Time</th></tr>
+                            </thead>
+                            <tbody id="cmd-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payloads View -->
+            <div id="view-payloads" class="view">
+                <div class="view-header">
+                    <h2>Payload Suite</h2>
+                </div>
+                <div class="payload-grid" id="payload-list"></div>
+            </div>
+
+            <!-- Exploits View -->
+            <div id="view-exploits" class="view">
+                <div class="view-header">
+                    <h2>Exploit Arsenal</h2>
+                </div>
+                <div class="panel">
+                    <div class="panel-body" id="exploit-list"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
