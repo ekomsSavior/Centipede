@@ -34,7 +34,7 @@ centipede/
 The worm carries multiple kernel privilege escalation exploits that chain automatically:
 
 - **dirtyfrag** (CVE-2026-43284 + CVE-2026-43500) — xfrm-ESP and RxRPC page-cache write chain. Affects Linux kernels from 4.x through 6.x (2017 to present). Two variants cover each other's blind spots: xfrm-ESP provides a powerful arbitrary 4-byte STORE primitive (requires user namespace), while RxRPC requires no namespace privileges.
-- **Copy Fail** (CVE-2023-6173) — AF_ALG/algif_aead page-cache write vulnerability. Predecessor to dirtyfrag, covers kernels where the dirtyfrag modules are unavailable but AF_ALG sockets are exposed.
+- **Copy Fail** (CVE-2026-31431) — AF_ALG/algif_aead page-cache write vulnerability. Predecessor to dirtyfrag, covers kernels where the dirtyfrag modules are unavailable but AF_ALG sockets are exposed.
 - **Dirty Pipe** (CVE-2022-0847) — Direct pipe write to overwrite read-only files. Linux 5.8 through 5.16.
 - **PwnKit** (CVE-2021-4034) — pkexec argument injection on all distributions with pkexec installed.
 - **GameOverlay** (CVE-2023-3269) — Ubuntu overlayfs LPE. Ubuntu kernels with overlayfs support.
@@ -204,7 +204,7 @@ Command-line flags override config file values. The config file is read from /et
 The exploit chain executes in order until root is obtained:
 
 1. **dirtyfrag** (CVE-2026-43284 + CVE-2026-43500) — Kernel 4.x through 6.x. xfrm-ESP page-cache write requires user namespace; RxRPC variant requires no namespace.
-2. **Copy Fail** (CVE-2023-6173) — Kernel 5.x through 6.x with algif_aead module or AF_ALG socket support.
+2. **Copy Fail** (CVE-2026-31431) — Kernel 5.x through 6.x with algif_aead module or AF_ALG socket support.
 3. **Dirty Pipe** (CVE-2022-0847) — Kernel 5.8 through 5.16.
 4. **PwnKit** (CVE-2021-4034) — Any distribution with pkexec installed.
 5. **GameOverlay** (CVE-2023-3269) — Ubuntu kernels with overlayfs.
